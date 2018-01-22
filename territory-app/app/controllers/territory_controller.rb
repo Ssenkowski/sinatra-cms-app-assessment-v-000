@@ -6,6 +6,11 @@ class TerritoryController < ApplicationController
     erb :"/territories/territories"
   end
 
+  get '/territories/new' do
+
+    erb :'/territories/new'
+  end
+
   get '/territories/sign_in_or_out' do
 
     erb :"/territories/sign_in_or_out"
