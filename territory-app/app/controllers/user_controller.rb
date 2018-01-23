@@ -14,7 +14,7 @@ class UserController < ApplicationController
         redirect '/territories'
       end
         @user = User.new(params)
-        #binding.pry
+        binding.pry
         if @user.save
         session[:user_id] = @user.id
         redirect '/territories'
@@ -44,7 +44,10 @@ class UserController < ApplicationController
       end
     end
 
-    get '/users'
+    get 'profile/:id' do
+
+      erb :"profile/#{user.id}"
+    end
 
     get '/logout' do
       session.clear
