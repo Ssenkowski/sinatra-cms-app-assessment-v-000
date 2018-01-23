@@ -1,1 +1,19 @@
 #Display user name, email and territories checked out.  Link to edit page to change profile information.
+<h2> <%= @user.name %> </h2>
+<h3> <%= @user.email %> </h3>
+<h3><%= @user.territories.all %></h3>
+List the links to each territory/:id page on this page or if possible list and display the images of each territory on this page that the user has signed out.
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<p> <a href="/user/<%=@user.id%>/edit">Edit User</a></p>
+<p><a href="/territories">Back</a> to all homepage</p>
+
+
+<form action="/user/<%=@user.id%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="submit" value="Delete User">
+</form>
