@@ -7,7 +7,6 @@ class TerritoryController < ApplicationController
   end
 
   get '/territories/new' do
-
     erb :'/territories/new'
   end
 
@@ -35,7 +34,7 @@ class TerritoryController < ApplicationController
 
   get '/territories/sign_in_or_out' do
 
-     :"/territories/sign_in_or_out"
+    erb :"/territories/sign_in_or_out"
   end
 
   post '/territories/sign_in_or_out' do
@@ -43,8 +42,4 @@ class TerritoryController < ApplicationController
     redirect :"/users/show_user"
   end
 
-  get '/territories/sign_in_or_out' do
-
-    erb :"/territories/sign_in_or_out"
-  end
 end
