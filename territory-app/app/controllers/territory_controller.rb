@@ -2,8 +2,8 @@ require 'pry'
 class TerritoryController < ApplicationController
 
   get '/territories' do
-
-    erb :"/territories/territories"
+    @territories = Territory.all
+    erb :"territories/territories"
   end
 
   get '/territories/new' do
@@ -12,13 +12,20 @@ class TerritoryController < ApplicationController
   end
 
   post '/territories/new' do
-
-    erb :'/territories/new'
+    @territory = Territory.new(params)
+      if @territory.save
+        session[:territory_id] = @territory.id
+        session[:number] = @territory.number
+        session[:designation] = @territory.designation
+        redirect "/territories/#{@territory.id}"
+      else
+        redirect '/territories/new'
+      end
   end
 
   get "/territories/:id" do
-
-    redirect "/territories/show_territory"
+    @territory = Territory.find(params[:id])
+    erb :"/territories/show_territory"
   end
 
   patch '/territories/:id/edit' do
@@ -36,4 +43,8 @@ class TerritoryController < ApplicationController
     redirect :"/users/show_user"
   end
 
+  get '/territories/sign_in_or_out' do
+
+    erb :"/territories/sign_in_or_out"
+  end
 end

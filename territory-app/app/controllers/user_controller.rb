@@ -14,12 +14,11 @@ class UserController < ApplicationController
         redirect '/territories'
       end
         @user = User.new(params)
-        binding.pry
         if @user.save
-        session[:user_id] = @user.id
-        redirect '/territories'
-      else
-        redirect '/signup'
+          session[:user_id] = @user.id
+          redirect '/territories'
+        else
+          redirect '/signup'
       end
     end
 

@@ -1,18 +1,14 @@
 Add a new Terriorty card, image, designation(residential, business, writing)
 <h1> Create a new Territory card </h1>
-<form action="/new" method="POST"
+<form action="/territories/new" method="POST"
     <label>Territory Number: </label>
-    <input type="text" name="territory[name]" id="territory_name"
+    <input type="text" name="number" id="territory_number"</input>
     <br></br>
     <br></br>
     <label>Territory Designation: </label><br>
-    <input type="checkbox" name="residential" value="residential"> Residential
-    <input type="checkbox" name="business" value="business"> Business
-    <input type="checkbox" name="writing" value="writing"> Writing <br>
+    <input type="checkbox" name="designation" value="residential"> Residential</input>
+    <input type="checkbox" name="designation" value="business"> Business</input>
+    <input type="checkbox" name="designation" value="writing"> Writing </input><br>
     <br></br>
-    <label>Territory Image: </label>
-    <input type="file" name="pic" id="pic"
-    <br></br>
-    <br></br>
-  <input type="submit" value="Submit"
+  <input type="submit" value="Create">
 </form>
