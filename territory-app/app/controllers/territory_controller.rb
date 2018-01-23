@@ -11,15 +11,19 @@ class TerritoryController < ApplicationController
   end
 
   post '/territories/new' do
+    if logged_in?
     @territory = Territory.new(params)
       if @territory.save
         session[:territory_id] = @territory.id
         session[:number] = @territory.number
+        session[:number] = @user.territories
         session[:designation] = @territory.designation
         redirect "/territories/#{@territory.id}"
       else
         redirect '/territories/new'
       end
+      redirect '/users/login'
+    end
   end
 
   get "/territories/:id" do
