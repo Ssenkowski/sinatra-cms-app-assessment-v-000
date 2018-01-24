@@ -33,6 +33,11 @@ class TerritoryController < ApplicationController
       end
   end
 
+  get '/territories/unauthorized' do
+
+    erb :'/territories/unauthorized'
+  end
+
   get "/territories/:id" do
     if logged_in?
       @territory = Territory.find(params[:id])
@@ -48,8 +53,11 @@ class TerritoryController < ApplicationController
       @territory = Territory.find(params[:id])
       @user_id = session[:user_id]
       @user = User.find_by(params[:"#{@user_id}"])
-      binding.pry
-      erb :"territories/edit"
+      if @territory.user_id == session[:user_id]
+        erb :"territories/edit"
+      else
+        redirect to '/territories/unauthorized'
+      end
     else
       redirect '/login'
     end
@@ -65,9 +73,8 @@ class TerritoryController < ApplicationController
   end
 
   patch '/territories/:id/delete' do
-    if  @territory.user_id == session[:user_id]
-      @territory = Territory.find(params[:id])
-      binding.pry
+    @territory = Territory.find(params[:id])
+    if @territory.user_id == session[:user_id]
       @territory.delete
       redirect '/territories/territories'
     else
