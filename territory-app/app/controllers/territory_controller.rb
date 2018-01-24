@@ -3,6 +3,7 @@ class TerritoryController < ApplicationController
 
   get '/territories/territories' do
     @territories = Territory.all
+    # binding.pry
     erb :"territories/territories"
   end
 
@@ -31,9 +32,12 @@ class TerritoryController < ApplicationController
     erb :"/territories/show_territory"
   end
 
-  patch '/territories/:id/edit' do
+  get '/territories/:id/edit' do
+    erb :"territories/edit"
+  end
 
-    redirect "/territories/#{@territory.id}"
+  patch '/territories/:id/edit' do
+    redirect "/territories/show_territory"
   end
 
   get '/territories/sign_out' do

@@ -1,6 +1,6 @@
 #change Terriorty number, image, designation(residential, business, writing)
 <h1> Edit a Territory card </h1>
-<form action="/territories/<%=@territory.id%>" method="post"
+<form action="/territories/edit" method="post"
     <label>Change the Territory Number: </label>
     <input type="text" name="territory[name]" id="territory_name"
     <br></br>
@@ -14,5 +14,5 @@
     <input type="file" name="pic" id="pic"
     <br></br>
     <br></br>
-  <input type="submit" value="Submit"
+  <input type="submit" value="Submit">
 </form>

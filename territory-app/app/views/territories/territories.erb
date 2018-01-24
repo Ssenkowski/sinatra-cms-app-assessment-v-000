@@ -1,6 +1,7 @@
-#Allow logged in users to see what territories are available to sign out.
 <h1> Territories </h1>
-<p> Please check out a territory from the list of available territories below</p>
-<br>
-<br>
-<%= @territories.number %>
+<p> Please check out a territory from the list of available territories below:</p>
+<ul>
+  <%@territories.each do |t|%>
+    <li><a href='/territories/<%=t.id%>'><%=t.number%>: <%=t.designation.capitalize%></a></li>
+  <%end%>
+</ul>
