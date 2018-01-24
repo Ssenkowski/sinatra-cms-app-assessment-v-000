@@ -1,21 +1,14 @@
 require 'pry'
 class UserController < ApplicationController
 
-  get '/signup' do
-      if logged_in?
-        redirect '/'
-      else
+    get '/signup' do
         erb :'users/signup'
-      end
     end
 
     post '/signup' do
         @user = User.new(params)
+        binding.pry
         if @user.save
-          session[:user_id] = @user.id
-          session[:first_name, :last_name] = @user.name
-          session[:email] = @user.email
-          session[:username] = @user.username
           redirect '/users/show_user'
         else
           redirect '/signup'
@@ -45,7 +38,9 @@ class UserController < ApplicationController
 
     get '/users/show_user' do
       if logged_in?
-        @user = User.find_by(params)
+        @user = current_user
+        binding.pry
+
         erb :"/users/show_user"
       else
         redirect '/login'
