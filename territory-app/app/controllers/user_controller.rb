@@ -47,6 +47,14 @@ class UserController < ApplicationController
       end
     end
 
+    patch '/users/:id/delete' do
+      @user = current_user
+      # if @territory.user_id == session[:user_id]
+        @user.delete
+      redirect '/logout'
+      # end
+    end
+
     get '/logout' do
       if logged_in?
         session.clear
