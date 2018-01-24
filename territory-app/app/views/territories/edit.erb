@@ -2,7 +2,7 @@
 <h1> Edit a Territory card </h1>
 <form action="/territories/<%=@territory.id%>" method="post"
     <label>Change the Territory Number: </label>
-    <input type="text" name="territory[name]" id="territory_name"
+    <input type="text" name="number" id="territory_number"
     <br></br>
     <br></br>
     <label>Change the Territories Designation: </label><br>
@@ -10,9 +10,10 @@
     <input type="checkbox" name="designation" value="business"> Business
     <input type="checkbox" name="designation" value="writing"> Writing <br>
     <br></br>
-    <label> Submit a different Territory Image: </label>
-    <input type="file" name="pic" id="pic"
-    <br></br>
+    <label>Select or Add a User to Edit the Territories:
+      <input type="checkbox" name="user_id" value="<%=@user.id%>"> <%=@user.first_name%><%=@user.last_name%>
+      <br>
+      <input type="text" name="user_id" id="user_id"
     <br></br>
   <input type="submit" value="Submit">
 </form>

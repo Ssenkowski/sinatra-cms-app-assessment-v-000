@@ -13,6 +13,7 @@ class TerritoryController < ApplicationController
 
   get '/territories/new' do
     if logged_in?
+      @user = User.find_by(params[:first_name])
       erb :'/territories/new'
     else redirect to "/login"
     end
@@ -21,11 +22,13 @@ class TerritoryController < ApplicationController
   post '/territories/new' do
     if logged_in?
     @territory = Territory.new(params)
+    @user = User.find_by(params[:user_id])
       if @territory.save
         session[:territory_id] = @territory.id
         session[:number] = @territory.number
-        session[:number] = @user.territories
+        session[:user_id] = @user.id
         session[:designation] = @territory.designation
+        binding.pry
         redirect "/territories/#{@territory.id}"
       else
         redirect '/territories/new'
@@ -37,6 +40,7 @@ class TerritoryController < ApplicationController
   get "/territories/:id" do
     if logged_in?
       @territory = Territory.find(params[:id])
+      @user = User.find_by(params[:user_id])
       erb :"/territories/show_territory"
     else
       redirect '/login'
@@ -46,23 +50,27 @@ class TerritoryController < ApplicationController
   get '/territories/:id/edit' do
     if logged_in?
       @territory = Territory.find(params[:id])
+      @user = User.find(params[:id])
+      erb :"territories/edit"
     else
       redirect '/login'
     end
-    binding.pry
-      if @territory.save
-        session[:territory_id] = @territory.id
-        session[:number] = @territory.number
-        session[:number] = @user.territories
-        session[:designation] = @territory.designation
-        redirect "/territories/#{@territory.id}"
-      else
-        redirect '/territories/territories'
-      end
-    erb :"territories/edit"
   end
 
-  post '/territories/edit' do
-    redirect "/territories/territories"
+  post '/territories/:id' do
+    @territory = Territory.find(params[:id])
+    if @territory.update(params)
+      redirect "/territories/#{@territory.id}"
+    else
+      redirect "/territories/#{@territory.id}/edit"
+    end
+  end
+
+  patch '/territories/:id/delete' do
+    @territory = Territory.find(params[:id])
+    # if @territory.user_id == session[:user_id]
+      @territory.delete
+    redirect '/territories/territories'
+    # end
   end
 end
