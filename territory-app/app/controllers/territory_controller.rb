@@ -36,12 +36,12 @@ class TerritoryController < ApplicationController
     redirect "/territories/#{@territory.id}"
   end
 
-  get '/territories/sign_in_or_out' do
+  get '/territories/sign_out' do
 
-    erb :"/territories/sign_in_or_out"
+    erb :"/territories/sign_out"
   end
 
-  post '/territories/sign_in_or_out' do
+  post '/territories/sign_out' do
 
     redirect :"/users/show_user"
   end
