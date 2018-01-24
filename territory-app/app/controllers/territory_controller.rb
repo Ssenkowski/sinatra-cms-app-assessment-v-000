@@ -65,10 +65,13 @@ class TerritoryController < ApplicationController
   end
 
   patch '/territories/:id/delete' do
-    @territory = Territory.find(params[:id])
-    # if @territory.user_id == session[:user_id]
+    if  @territory.user_id == session[:user_id]
+      @territory = Territory.find(params[:id])
+      binding.pry
       @territory.delete
-    redirect '/territories/territories'
-    # end
+      redirect '/territories/territories'
+    else
+      redirect to '/territories/unauthorized'
+    end
   end
 end
