@@ -29,7 +29,7 @@ class UserController < ApplicationController
       if logged_in?
         redirect '/users/show_user'
       else
-        erb :'users/login'
+        erb :'/users/login'
       end
     end
 
@@ -47,13 +47,21 @@ class UserController < ApplicationController
     end
 
     get '/users/show_user' do
-      @user = User.find_by(params)
-      erb :"/users/show_user"
+      if logged_in?
+        @user = User.find_by(params)
+        erb :"/users/show_user"
+      else
+        redirect '/login'
+      end
     end
 
     get '/logout' do
-      session.clear
-      redirect '/login'
+      if logged_in?
+        session.clear
+        redirect '/login'
+      else
+        redirect '/login'
+      end
     end
 
 end

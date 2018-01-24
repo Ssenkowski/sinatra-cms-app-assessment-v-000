@@ -1,24 +1,13 @@
 <h2> <%= @user.first_name%><%= puts " "%> <%= @user.last_name %> </h2>
 <h4> Username: <%= @user.username %> </h4><br>
 <h4> Email: <%= @user.email %> </h4><br>
-<h4> Territories Signed Out: <%= @user %> </h4>
-
     <br>
     <br>
     <br>
     <br>
     <br>
-<!-- <h1>Return a Territory</h1>
-<br></br>
-<form action="/" method="POST"
-  <input type="checkbox" name="<%=territory.id%>" value="<%=territory.id%>"><%= %> <br>
-  <input type="checkbox" name="<%=territory.id%>" value="<%=territory.id%>" checked> <%=territory.name %> <br>
-  <input type="checkbox" name="<%=territory.id%>" value="<%=territory.id%>" checked> <%=territory.name %> <br>
-  <input type="submit" value="Submit">
-</form> -->
     <br>
-<p> <a href="/user/<%=@user.id%>/edit">Edit User</a></p>
-<p><a href="/territories">Back</a> to all homepage</p>
+<p><a href="/">Back</a> to all homepage</p>
 
 
 <form action="/user/<%=@user.id%>/delete" method="post">
