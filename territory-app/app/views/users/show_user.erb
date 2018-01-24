@@ -1,8 +1,8 @@
-#Display user name, email and territories checked out.  Link to edit page to change profile information.
-<h2> <%= @user.name %> </h2>
-<h3> <%= @user.email %> </h3>
-<h3><%= @user.territories.all %></h3>
-List the links to each territory/:id page on this page or if possible list and display the images of each territory on this page that the user has signed out.
+<h2> <%= @user.first_name%><%= puts " "%> <%= @user.last_name %> </h2>
+<h4> Username: <%= @user.username %> </h4><br>
+<h4> Email: <%= @user.email %> </h4><br>
+<h4> Territories Signed Out: <%= @user %> </h4>
+
     <br>
     <br>
     <br>
