@@ -1,1 +1,6 @@
 #Allow logged in users to see what territories are available to sign out.
+<h1> Territories </h1>
+<p> Please check out a territory from the list of available territories below</p>
+<br>
+<br>
+<%= @territories.each {|territory| territory[1]} %>

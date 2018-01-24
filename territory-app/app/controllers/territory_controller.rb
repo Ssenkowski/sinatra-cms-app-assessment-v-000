@@ -1,7 +1,7 @@
 require 'pry'
 class TerritoryController < ApplicationController
 
-  get '/territories' do
+  get '/territories/territories' do
     @territories = Territory.all
     erb :"territories/territories"
   end
