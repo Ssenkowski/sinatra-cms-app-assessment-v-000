@@ -39,15 +39,4 @@ class TerritoryController < ApplicationController
   patch '/territories/:id/edit' do
     redirect "/territories/show_territory"
   end
-
-  get '/territories/sign_out' do
-
-    erb :"/territories/sign_out"
-  end
-
-  post '/territories/sign_out' do
-
-    redirect :"/users/show_user"
-  end
-
 end
