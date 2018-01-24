@@ -3,6 +3,7 @@ class TerritoryController < ApplicationController
 
   get '/territories/territories' do
     if logged_in?
+      @user = current_user
       @territories = Territory.all
       # binding.pry
       erb :"territories/territories"
@@ -13,28 +14,23 @@ class TerritoryController < ApplicationController
 
   get '/territories/new' do
     if logged_in?
-      @user = User.find_by(params[:first_name])
+      @user = current_user
       erb :'/territories/new'
-    else redirect to "/login"
+    else
+      redirect to "/login"
     end
   end
 
   post '/territories/new' do
-    if logged_in?
-    @territory = Territory.new(params)
-    @user = User.find_by(params[:user_id])
+    @territory_params = Territory.new(params)
+    @territory = @territory_params
+    @territory[:id] = "#{session[:territory_id]}"
+    @territory[:user_id] = "#{session[:user_id]}"
       if @territory.save
-        session[:territory_id] = @territory.id
-        session[:number] = @territory.number
-        session[:user_id] = @user.id
-        session[:designation] = @territory.designation
-        binding.pry
         redirect "/territories/#{@territory.id}"
       else
         redirect '/territories/new'
       end
-      redirect '/login'
-    end
   end
 
   get "/territories/:id" do
@@ -50,7 +46,9 @@ class TerritoryController < ApplicationController
   get '/territories/:id/edit' do
     if logged_in?
       @territory = Territory.find(params[:id])
-      @user = User.find(params[:id])
+      @user_id = session[:user_id]
+      @user = User.find_by(params[:"#{@user_id}"])
+      binding.pry
       erb :"territories/edit"
     else
       redirect '/login'
