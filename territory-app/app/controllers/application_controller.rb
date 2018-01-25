@@ -12,6 +12,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    if !logged_in?
+      flash[:notice] = "Please log in to continue."
+    else
+      @current_user = "#{current_user.first_name} #{current_user.last_name}"
+      flash[:notice] = "You are logged in as #{@current_user}"
+    end
     erb :index
   end
 
