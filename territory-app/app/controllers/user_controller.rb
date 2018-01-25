@@ -10,6 +10,7 @@ class UserController < ApplicationController
         if @user.save
           redirect '/users/show_user'
         else
+          flash[:error] = "Please be sure to fill out all the fields, if you have and you still see this message the username may already be in use, try a different username."
           redirect '/signup'
       end
     end
@@ -31,6 +32,7 @@ class UserController < ApplicationController
         session[:user_id] = @user.id
         redirect '/users/show_user'
       else
+        flash[:error] = "Invalid log in."
         redirect '/login'
       end
     end
@@ -40,6 +42,7 @@ class UserController < ApplicationController
         @user = current_user
         erb :"/users/show_user"
       else
+        flash[:error] = "You need to be logged in to view this page."
         redirect '/login'
       end
     end

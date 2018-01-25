@@ -5,10 +5,9 @@ class TerritoryController < ApplicationController
     if logged_in?
       @user = current_user
       @territories = Territory.all
-      # binding.pry
       erb :"territories/territories"
     else
-      redirect '/login'
+      redirect '/territories/unauthorized'
     end
   end
 
@@ -17,7 +16,7 @@ class TerritoryController < ApplicationController
       @user = current_user
       erb :'/territories/new'
     else
-      redirect to "/login"
+      redirect to '/territories/unauthorized'
     end
   end
 
@@ -26,15 +25,15 @@ class TerritoryController < ApplicationController
     @territory = @territory_params
     @territory[:id] = "#{session[:territory_id]}"
     @territory[:user_id] = "#{session[:user_id]}"
-      if @territory.save
-        redirect "/territories/#{@territory.id}"
-      else
-        redirect '/territories/new'
-      end
+    if @territory.save
+      redirect "/territories/#{@territory.id}"
+    else
+      flash[:error] = "Empty fields or territory already exists."
+      redirect '/territories/new'
+    end
   end
 
   get '/territories/unauthorized' do
-
     erb :'/territories/unauthorized'
   end
 
@@ -44,7 +43,7 @@ class TerritoryController < ApplicationController
       @user = User.find_by(params[:user_id])
       erb :"/territories/show_territory"
     else
-      redirect '/login'
+      redirect '/territories/unauthorized'
     end
   end
 
@@ -59,7 +58,7 @@ class TerritoryController < ApplicationController
         redirect to '/territories/unauthorized'
       end
     else
-      redirect '/login'
+      redirect '/territories/unauthorized'
     end
   end
 
@@ -68,6 +67,7 @@ class TerritoryController < ApplicationController
     if @territory.update(params)
       redirect "/territories/#{@territory.id}"
     else
+      flash[:error] = "That territory number is already in use.  Please enter a different number."
       redirect "/territories/#{@territory.id}/edit"
     end
   end
