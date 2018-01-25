@@ -1,6 +1,6 @@
 <h2> Territory Number: <%= @territory.number %> </h2>
 <h3> Territory Type: <%= @territory.designation.capitalize %> -------- Territory ID: <%= @territory.id %></h3>
-<h3> Territory Manager: <%= @user.first_name %> <%= @user.last_name%></h3>
+<h3> Territory Manager: <%= @manager.first_name %> <%= @manager.last_name%></h3>
     <br>
     <br>
     <br>
@@ -8,8 +8,8 @@
     <br>
     <br>
 <p> <a href="/territories/<%=@territory.id%>/edit">Edit Territory</a></p>
-<p><a href="/territories/territories">Back</a> to all territories</p>
-<p><a href="/">Back</a> to the homepage</p>
+<p><a href="/territories/territories">Go</a> to all territories</p>
+<p><a href="/">Go</a> to the homepage</p>
 
 
 

@@ -28,7 +28,7 @@ class TerritoryController < ApplicationController
     if @territory.save
       redirect "/territories/#{@territory.id}"
     else
-      flash[:error] = "Empty fields or territory already exists."
+      flash[:error] = "Empty fields or territory with that number already exists. Please fill out all the fields or try a different territory number."
       redirect '/territories/new'
     end
   end
@@ -40,7 +40,9 @@ class TerritoryController < ApplicationController
   get "/territories/:id" do
     if logged_in?
       @territory = Territory.find(params[:id])
-      @user = User.find_by(params[:user_id])
+      @creator_id_string = @territory.user_id
+      @creator_id = @creator_id_string.to_i
+      @manager = User.find_by_id(@creator_id)
       erb :"/territories/show_territory"
     else
       redirect '/territories/unauthorized'
