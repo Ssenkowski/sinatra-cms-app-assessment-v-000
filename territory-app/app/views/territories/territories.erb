@@ -1,8 +1,10 @@
 <h1> Territories </h1>
-<p> Please check out a territory from the list of available territories below:</p>
+<p> <%=current_user.first_name%> <%=current_user.last_name%> View a territory from the list of territories below:</p>
+<p>  If you wish to edit a territory from this list please select one with your Manager ID: <%=current_user.id%></p>
+
 <ul>
   <%@territories.each do |t|%>
-    <li><a href='/territories/<%=t.id%>'><%=t.number%>: <%=t.designation.capitalize%></a></li>
+    <li><a href='/territories/<%=t.id%>'><%=t.number%>: <%=t.designation.capitalize%></a> --- Manager ID:<%=t.user_id%></li>
   <%end%>
 </ul>
 <br>
