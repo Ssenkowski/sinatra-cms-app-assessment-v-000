@@ -50,12 +50,12 @@ class TerritoryController < ApplicationController
   end
 
   get '/territories/:id/edit' do
-      @territory = Territory.find(params[:id])
-      if @territory.user == current_user
-        erb :"territories/edit"
-      else
-      redirect '/territories/unauthorized'
-      end
+    @territory = Territory.find(params[:id])
+    if @territory.user == current_user
+      erb :"territories/edit"
+    else
+    redirect '/territories/unauthorized'
+    end
   end
 
   post '/territories/:id' do
