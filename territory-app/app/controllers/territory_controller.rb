@@ -1,7 +1,7 @@
 require 'pry'
 class TerritoryController < ApplicationController
 
-  get '/territories/territories' do
+  get 'territories/territories' do
     if logged_in?
       @user = current_user
       @territories = Territory.all
