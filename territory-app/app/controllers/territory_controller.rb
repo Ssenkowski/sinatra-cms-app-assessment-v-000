@@ -76,6 +76,7 @@ class TerritoryController < ApplicationController
       redirect "/territories/#{@territory.id}/edit"
     end
   end
+  end
 
   patch '/territories/:id/delete' do
     @territory = Territory.find(params[:id])
