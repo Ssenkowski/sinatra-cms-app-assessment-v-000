@@ -54,7 +54,7 @@ class TerritoryController < ApplicationController
       @territory = Territory.find(params[:id])
       @user_id = session[:user_id]
       @user = User.find_by(params[:"#{@user_id}"])
-      if @territory.user_id == session[:user_id]
+      if @territory.user_id == current_user
         erb :"territories/edit"
       else
         redirect to '/territories/unauthorized'
@@ -73,7 +73,7 @@ class TerritoryController < ApplicationController
         flash[:error] = "That territory number is already in use.  Please enter a different number."
         redirect "/territories/#{@territory.id}/edit"
       end
-    else 
+    else
       redirect to '/territories/unauthorized'
     end
   end
