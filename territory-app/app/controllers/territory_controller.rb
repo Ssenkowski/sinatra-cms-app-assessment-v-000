@@ -73,6 +73,7 @@ class TerritoryController < ApplicationController
         flash[:error] = "That territory number is already in use.  Please enter a different number."
         redirect "/territories/#{@territory.id}/edit"
       end
+    else
     end
   end
 
