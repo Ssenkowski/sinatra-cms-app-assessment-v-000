@@ -52,9 +52,7 @@ class TerritoryController < ApplicationController
   get '/territories/:id/edit' do
     if logged_in?
       @territory = Territory.find(params[:id])
-      @user_id = session[:user_id]
-      @user = User.find_by(params[:"#{@user_id}"])
-      if @territory.user_id == current_user.id
+      if @territory.user == current_user
         erb :"territories/edit"
       else
         redirect to '/territories/unauthorized'
