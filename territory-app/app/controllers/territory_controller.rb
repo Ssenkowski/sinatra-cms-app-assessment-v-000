@@ -5,7 +5,7 @@ class TerritoryController < ApplicationController
     if logged_in?
       @user = current_user
       @territories = Territory.all
-      erb :"territories/territories"
+      erb :"territories/"
     else
       redirect '/territories/unauthorized'
     end
