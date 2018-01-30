@@ -50,27 +50,25 @@ class TerritoryController < ApplicationController
   end
 
   get '/territories/:id/edit' do
-    if logged_in?
-      @territory = Territory.find(params[:id])
-      @user_id = session[:user_id]
-      @user = User.find_by(params[:"#{@user_id}"])
-      if @territory.user_id == session[:user_id]
-        erb :"territories/edit"
-      else
-        redirect to '/territories/unauthorized'
-      end
+    @territory = Territory.find(params[:id])
+    if @territory.user == current_user
+      erb :"territories/edit"
     else
-      redirect '/territories/unauthorized'
+    redirect '/territories/unauthorized'
     end
   end
 
   post '/territories/:id' do
     @territory = Territory.find(params[:id])
-    if @territory.update(params)
-      redirect "/territories/#{@territory.id}"
+    if  @territory.user_id == session[:user_id]
+      if @territory.update(params)
+        redirect "/territories/#{@territory.id}"
+      else
+        flash[:error] = "That territory number is already in use.  Please enter a different number."
+        redirect "/territories/#{@territory.id}/edit"
+      end
     else
-      flash[:error] = "That territory number is already in use.  Please enter a different number."
-      redirect "/territories/#{@territory.id}/edit"
+      redirect to '/territories/unauthorized'
     end
   end
 
