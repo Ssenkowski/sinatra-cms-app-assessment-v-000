@@ -65,15 +65,15 @@ class TerritoryController < ApplicationController
   end
 
   post '/territories/:id' do
-    if  @territory.user_id == session[:user_id]
     @territory = Territory.find(params[:id])
-    if @territory.update(params)
-      redirect "/territories/#{@territory.id}"
-    else
-      flash[:error] = "That territory number is already in use.  Please enter a different number."
-      redirect "/territories/#{@territory.id}/edit"
+    if  @territory.user_id == session[:user_id]
+      if @territory.update(params)
+        redirect "/territories/#{@territory.id}"
+      else
+        flash[:error] = "That territory number is already in use.  Please enter a different number."
+        redirect "/territories/#{@territory.id}/edit"
+      end
     end
-  end
   end
 
   patch '/territories/:id/delete' do
