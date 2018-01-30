@@ -65,6 +65,8 @@ class TerritoryController < ApplicationController
   end
 
   post '/territories/:id' do
+    if logged_in?
+      @territory.user_id == session[:user_id]
     @territory = Territory.find(params[:id])
     if @territory.update(params)
       redirect "/territories/#{@territory.id}"
